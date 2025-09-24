@@ -167,7 +167,7 @@ function preload() {
   imgScene1[0] = loadImage("images/1.png");
   imgScene1[1] = loadImage("images/2.png");
   imgScene1[2] = loadImage("images/3.png");
-// quiz images
+  // quiz images
   for (let i = 0; i < 6; i++) {
     quizImgs[i] = loadImage("images/M" + (i + 1) + ".png");
   }
@@ -175,15 +175,15 @@ function preload() {
   imgScene4 = loadImage("images/Ending1.png");
   imgScene5 = loadImage("images/Ending2.png");
 
-   //scene 2 images
+  //scene 2 images
   imgScene2[0] = loadImage("images/Group1.png");
   imgScene2[1] = loadImage("images/Group2.png");
   imgScene2[2] = loadImage("images/Group3.png");
 
   // scene 4 images
-imgScene4Set[0] = loadImage("images/Ending1.png");
-imgScene4Set[1] = loadImage("images/Ending1.2.png");
-imgScene4Set[2] = loadImage("images/Ending1.3.png");
+  imgScene4Set[0] = loadImage("images/Ending1.png");
+  imgScene4Set[1] = loadImage("images/Ending1.2.png");
+  imgScene4Set[2] = loadImage("images/Ending1.3.png");
   // scene 5 images
   imgScene5Set[0] = loadImage("images/Ending2.png");
   imgScene5Set[1] = loadImage("images/Ending2.2.png");
@@ -195,48 +195,51 @@ imgScene4Set[2] = loadImage("images/Ending1.3.png");
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont("Gloria Hallelujah");
-  textSize(18);
+  textSize(width * 0.015);
 }
 
- music = document.getElementById("music");
-  music.volume = 0.2;
+music = document.getElementById("music");
+music.volume = 0.2;
 
 /////////////////////// Draw ///////////////////////
 function draw() {
   background(15);
-
-if (scene === 1) {
-  frameCounterScene1++;
-
-  if (frameCounterScene1 % 24 === 0) {
-    imgIndex1 = (imgIndex1 + 1) % imgScene1.length;
+  function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
   }
 
-  imageMode(CENTER);
-  image(imgScene1[imgIndex1], width / 2, height / 2, width, height);
+  if (scene === 1) {
+    frameCounterScene1++;
 
-  fill(255);
-  textAlign(CENTER, CENTER);
+    if (frameCounterScene1 % 24 === 0) {
+      imgIndex1 = (imgIndex1 + 1) % imgScene1.length;
+    }
 
-  textSize(86);
-  text("Behind the mask", width / 2, height / 2 - 100);
+    imageMode(CENTER);
+    image(imgScene1[imgIndex1], width / 2, height / 2, width, height);
 
-  textSize(18);
-  text("[Click anywhere to begin]", width / 2, height / 2);
+    fill(255);
+    textAlign(CENTER, CENTER);
+
+    textSize(86);
+    text("Behind the mask", width / 2, height / 2 - 100);
+
+    textSize(18);
+    text("[Click anywhere to begin]", width / 2, height / 2);
 
 
   } else if (scene === 2) {
     frameCounter++;
-  frameCounterScene2++;
+    frameCounterScene2++;
 
-  
-  if (frameCounterScene2 % 24 === 0) {
-    imgIndex2 = (imgIndex2 + 1) % imgScene2.length;
-  }
 
-  // draw current image
-  imageMode(CENTER);
-  image(imgScene2[imgIndex2], width / 2, height / 2, width, height);
+    if (frameCounterScene2 % 24 === 0) {
+      imgIndex2 = (imgIndex2 + 1) % imgScene2.length;
+    }
+
+    // draw current image
+    imageMode(CENTER);
+    image(imgScene2[imgIndex2], width / 2, height / 2, width, height);
 
     drawChatBox();
 
@@ -244,56 +247,56 @@ if (scene === 1) {
     drawQuiz();
 
   } else if (scene === 4) {
-  frameCounterScene4++;
+    frameCounterScene4++;
 
-  if (frameCounterScene4 % 24 === 0) {
-    imgIndex4 = (imgIndex4 + 1) % imgScene4Set.length;
-  }
+    if (frameCounterScene4 % 24 === 0) {
+      imgIndex4 = (imgIndex4 + 1) % imgScene4Set.length;
+    }
 
-  imageMode(CENTER);
-  image(imgScene4Set[imgIndex4], width / 2, height / 2, width, height);
+    imageMode(CENTER);
+    image(imgScene4Set[imgIndex4], width / 2, height / 2, width, height);
 
-  frameCounter4++;
-  if (frameCounter4 % typingSpeed === 0 && charIndex4 < dialog4[currentLine4].length) {
-    charIndex4++;
-  }
-  drawChatBoxScene4();
-function drawChatBoxScene4() {
-  let line = dialog4[currentLine4].substring(0, charIndex4);
-  drawChatUI(line);
-}
+    frameCounter4++;
+    if (frameCounter4 % typingSpeed === 0 && charIndex4 < dialog4[currentLine4].length) {
+      charIndex4++;
+    }
+    drawChatBoxScene4();
+    function drawChatBoxScene4() {
+      let line = dialog4[currentLine4].substring(0, charIndex4);
+      drawChatUI(line);
+    }
 
-} else if (scene === 5) {
-  frameCounterScene5++;
+  } else if (scene === 5) {
+    frameCounterScene5++;
 
-  if (frameCounterScene5 % 24 === 0) {
-    imgIndex5 = (imgIndex5 + 1) % imgScene5Set.length;
-  }
+    if (frameCounterScene5 % 24 === 0) {
+      imgIndex5 = (imgIndex5 + 1) % imgScene5Set.length;
+    }
 
-  imageMode(CENTER);
-  image(imgScene5Set[imgIndex5], width / 2, height / 2, width, height);
-
-
-  frameCounter5++;
-  if (frameCounter5 % typingSpeed === 0 && charIndex5 < dialog5[currentLine5].length) {
-    charIndex5++;
-  }
-  drawChatBoxScene5();
+    imageMode(CENTER);
+    image(imgScene5Set[imgIndex5], width / 2, height / 2, width, height);
 
 
-function drawChatBoxScene5() {
-  let line = dialog5[currentLine5].substring(0, charIndex5);
-  drawChatUI(line);
-}
+    frameCounter5++;
+    if (frameCounter5 % typingSpeed === 0 && charIndex5 < dialog5[currentLine5].length) {
+      charIndex5++;
+    }
+    drawChatBoxScene5();
+
+
+    function drawChatBoxScene5() {
+      let line = dialog5[currentLine5].substring(0, charIndex5);
+      drawChatUI(line);
+    }
 
   } else if (scene === 6) {
     background(0);
     fill(255);
     textAlign(CENTER, CENTER);
-    textSize(28);
+    textSize(50);
     text("You have completed the quiz.", width / 2, height / 2 - 40);
     textSize(20);
-    text("Click to reveal your ending...", width / 2, height / 2 + 20);
+    text("Click to reveal your result...", width / 2, height / 2 + 20);
   }
 }
 
@@ -351,206 +354,206 @@ function mousePressed() {
   }
 }
 
-  /////////////////////// Quiz ///////////////////////
+/////////////////////// Quiz ///////////////////////
 
-  function drawQuiz() {
-    let q = questions[currentQ];
-    let margin = 20;
+function drawQuiz() {
+  let q = questions[currentQ];
+  let margin = 20;
 
-    // --- background image ---
-    let imgIndex = Math.floor(currentQ / 2); // change every 2 questions
-    if (imgIndex > 5) imgIndex = 5; // clamp to last image (M6)
+  // --- background image ---
+  let imgIndex = Math.floor(currentQ / 2); // change every 2 questions
+  if (imgIndex > 5) imgIndex = 5; // clamp to last image (M6)
 
-    imageMode(CENTER);
-    image(quizImgs[imgIndex], width / 2, height / 2, width, height);
+  imageMode(CENTER);
+  image(quizImgs[imgIndex], width / 2, height / 2, width, height);
 
-    // --- Measure question text height dynamically ---
-    textSize(18);
-    textAlign(LEFT, TOP);
-    let questionW = width - 100 - margin * 2;
-    let questionH = textBoundsHeight(q.q, questionW);
+  // --- Measure question text height dynamically ---
+  textSize(18);
+  textAlign(LEFT, TOP);
+  let questionW = width - 100 - margin * 2;
+  let questionH = textBoundsHeight(q.q, questionW);
 
-    // --- Box dimensions (question + answers) ---
-    let btnH = 50;
-    let gridRows = 2;
-    let spacing = 15;
-    let boxH = questionH + margin * 3 + gridRows * btnH + spacing; // auto height
-    let boxW = width - 100;
-    let boxX = 50;
-    let boxY = height - boxH - 10;
+  // --- Box dimensions (question + answers) ---
+  let btnH = 50;
+  let gridRows = 2;
+  let spacing = 15;
+  let boxH = questionH + margin * 3 + gridRows * btnH + spacing; // auto height
+  let boxW = width - 100;
+  let boxX = 50;
+  let boxY = height - boxH - 10;
 
-    // --- Draw outer box ---
+  // --- Draw outer box ---
+  stroke(255);
+  strokeWeight(2);
+  fill(0);
+  rect(boxX, boxY, boxW, boxH, 5);
+
+  // --- Draw question text ---
+  fill(255);
+  noStroke();
+  textSize(24);
+  text(q.q, boxX + margin, boxY + margin, questionW, questionH);
+
+  // --- Answer buttons (2x2 grid) ---
+  textSize(20);
+  let btnW = (boxW - margin * 3) / 2; // two columns
+  let startY = boxY + margin + questionH + margin;
+
+  for (let i = 0; i < 4; i++) {
+    let col = i % 2;
+    let row = Math.floor(i / 2);
+    let x = boxX + margin + col * (btnW + margin);
+    let y = startY + row * (btnH + spacing);
+
+    // Button outline
     stroke(255);
-    strokeWeight(2);
-    fill(0);
-    rect(boxX, boxY, boxW, boxH, 5);
+    noFill();
+    rect(x, y, btnW, btnH, 5);
 
-    // --- Draw question text ---
-    fill(255);
+    // Button text
     noStroke();
-    textSize(24);
-    text(q.q, boxX + margin, boxY + margin, questionW, questionH);
+    fill(255);
+    textAlign(LEFT, CENTER);
+    text(q.answers[i], x + 10, y + btnH / 2);
 
-    // --- Answer buttons (2x2 grid) ---
-    textSize(20);
-    let btnW = (boxW - margin * 3) / 2; // two columns
-    let startY = boxY + margin + questionH + margin;
-
-    for (let i = 0; i < 4; i++) {
-      let col = i % 2;
-      let row = Math.floor(i / 2);
-      let x = boxX + margin + col * (btnW + margin);
-      let y = startY + row * (btnH + spacing);
-
-      // Button outline
-      stroke(255);
+    // Hover effect
+    if (
+      mouseX > x && mouseX < x + btnW &&
+      mouseY > y && mouseY < y + btnH
+    ) {
       noFill();
+      stroke(0, 255, 0);
       rect(x, y, btnW, btnH, 5);
-
-      // Button text
-      noStroke();
-      fill(255);
-      textAlign(LEFT, CENTER);
-      text(q.answers[i], x + 10, y + btnH / 2);
-
-      // Hover effect
-      if (
-        mouseX > x && mouseX < x + btnW &&
-        mouseY > y && mouseY < y + btnH
-      ) {
-        noFill();
-        stroke(0, 255, 0);
-        rect(x, y, btnW, btnH, 5);
-      }
     }
   }
+}
 
-  // --- Helper: estimate text height for wrapping ---
-  function textBoundsHeight(str, w) {
-    let words = str.split(" ");
-    let line = "";
-    let h = 0;
+// --- Helper: estimate text height for wrapping ---
+function textBoundsHeight(str, w) {
+  let words = str.split(" ");
+  let line = "";
+  let h = 0;
 
-    for (let i = 0; i < words.length; i++) {
-      let testLine = line + words[i] + " ";
-      let testW = textWidth(testLine);
-      if (testW > w && i > 0) {
-        h += textAscent() + textDescent();
-        line = words[i] + " ";
-      } else {
-        line = testLine;
-      }
-    }
-    h += textAscent() + textDescent();
-    return h;
-  }
-
-  // --- Handle answer selection ---
-  function handleAnswer(i) {
-    // Count A/B vs C/D
-    if (i === 0 || i === 1) {
-      scoreAB++;
+  for (let i = 0; i < words.length; i++) {
+    let testLine = line + words[i] + " ";
+    let testW = textWidth(testLine);
+    if (testW > w && i > 0) {
+      h += textAscent() + textDescent();
+      line = words[i] + " ";
     } else {
-      scoreCD++;
-    }
-
-    // Next question or end quiz
-    if (currentQ < questions.length - 1) {
-      currentQ++;
-    } else {
-      scene = 6; // go to results scene after finishing all questions
+      line = testLine;
     }
   }
-  function checkQuizClick() {
-    let q = questions[currentQ];
-    let margin = 20;
+  h += textAscent() + textDescent();
+  return h;
+}
 
-    // Match the same layout math as drawQuiz()
-    let questionW = width - 100 - margin * 2;
-    let questionH = textBoundsHeight(q.q, questionW);
+// --- Handle answer selection ---
+function handleAnswer(i) {
+  // Count A/B vs C/D
+  if (i === 0 || i === 1) {
+    scoreAB++;
+  } else {
+    scoreCD++;
+  }
 
-    let btnH = 50;
-    let spacing = 15;
-    let boxW = width - 100;
-    let boxX = 50;
-    let boxY = height - (questionH + margin * 3 + 2 * btnH + spacing) - 10;
+  // Next question or end quiz
+  if (currentQ < questions.length - 1) {
+    currentQ++;
+  } else {
+    scene = 6; // go to results scene after finishing all questions
+  }
+}
+function checkQuizClick() {
+  let q = questions[currentQ];
+  let margin = 20;
 
-    let btnW = (boxW - margin * 3) / 2;
-    let startY = boxY + margin + questionH + margin;
+  // Match the same layout math as drawQuiz()
+  let questionW = width - 100 - margin * 2;
+  let questionH = textBoundsHeight(q.q, questionW);
 
-    // Loop through 4 buttons
-    for (let i = 0; i < 4; i++) {
-      let col = i % 2;
-      let row = Math.floor(i / 2);
-      let x = boxX + margin + col * (btnW + margin);
-      let y = startY + row * (btnH + spacing);
+  let btnH = 50;
+  let spacing = 15;
+  let boxW = width - 100;
+  let boxX = 50;
+  let boxY = height - (questionH + margin * 3 + 2 * btnH + spacing) - 10;
 
-      if (
-        mouseX > x && mouseX < x + btnW &&
-        mouseY > y && mouseY < y + btnH
-      ) {
-        handleAnswer(i); // choose this answer
-        break;
-      }
+  let btnW = (boxW - margin * 3) / 2;
+  let startY = boxY + margin + questionH + margin;
+
+  // Loop through 4 buttons
+  for (let i = 0; i < 4; i++) {
+    let col = i % 2;
+    let row = Math.floor(i / 2);
+    let x = boxX + margin + col * (btnW + margin);
+    let y = startY + row * (btnH + spacing);
+
+    if (
+      mouseX > x && mouseX < x + btnW &&
+      mouseY > y && mouseY < y + btnH
+    ) {
+      handleAnswer(i); // choose this answer
+      break;
     }
   }
+}
 
 
-  /////////////////////// Chatboxes ///////////////////////
-  function drawChatBox() {
-    let boxH = 150;
-    let boxW = width - 200;
-    let boxX = (width - boxW) / 2;
-    let boxY = height - boxH - 20;
+/////////////////////// Chatboxes ///////////////////////
+function drawChatBox() {
+  let boxH = 150;
+  let boxW = width - 200;
+  let boxX = (width - boxW) / 2;
+  let boxY = height - boxH - 20;
 
-    stroke(255);
-    strokeWeight(3);
-    fill(0, 200);
-    rect(boxX, boxY, boxW, boxH, 10);
+  stroke(255);
+  strokeWeight(3);
+  fill(0, 200);
+  rect(boxX, boxY, boxW, boxH, 10);
 
-    if (frameCounter % typingSpeed === 0 && charIndex < dialog[currentLine].length) {
-      charIndex++;
-    }
-
-    fill(255);
-    noStroke();
-    textAlign(LEFT, TOP);
-    textSize(24); 
-    let margin = 20;
-    let visibleText = dialog[currentLine].substring(0, charIndex);
-    text(visibleText, boxX + margin, boxY + margin, boxW - 2 * margin, boxH - 2 * margin);
+  if (frameCounter % typingSpeed === 0 && charIndex < dialog[currentLine].length) {
+    charIndex++;
   }
 
-  function drawChatBoxScene4() {
-    imageMode(CENTER);
-    image(imgScene4, width / 2, height / 2, width, height);
+  fill(255);
+  noStroke();
+  textAlign(LEFT, TOP);
+  textSize(24);
+  let margin = 20;
+  let visibleText = dialog[currentLine].substring(0, charIndex);
+  text(visibleText, boxX + margin, boxY + margin, boxW - 2 * margin, boxH - 2 * margin);
+}
 
-    let line = dialog4[currentLine4].substring(0, charIndex4);
-    drawChatUI(line);
-  }
+function drawChatBoxScene4() {
+  imageMode(CENTER);
+  image(imgScene4, width / 2, height / 2, width, height);
 
-  function drawChatBoxScene5() {
-    imageMode(CENTER);
-    image(imgScene5, width / 2, height / 2, width, height);
+  let line = dialog4[currentLine4].substring(0, charIndex4);
+  drawChatUI(line);
+}
 
-    let line = dialog5[currentLine5].substring(0, charIndex5);
-    drawChatUI(line);
-  }
+function drawChatBoxScene5() {
+  imageMode(CENTER);
+  image(imgScene5, width / 2, height / 2, width, height);
 
-  function drawChatUI(textLine) {
-    let boxW = width - 150;
-    let boxH = 120;
-    let boxX = (width - boxW) / 2;
-    let boxY = height - boxH - 20;
+  let line = dialog5[currentLine5].substring(0, charIndex5);
+  drawChatUI(line);
+}
 
-    stroke(255);
-    strokeWeight(3);
-    fill(0);
-    rect(boxX, boxY, boxW, boxH, 10);
+function drawChatUI(textLine) {
+  let boxW = width - 150;
+  let boxH = 120;
+  let boxX = (width - boxW) / 2;
+  let boxY = height - boxH - 20;
 
-    noStroke();
-    fill(255);
-    textSize(22);
-    textAlign(LEFT, TOP);
-    text(textLine, boxX + 20, boxY + 20, boxW - 40, boxH - 40);
-  }
+  stroke(255);
+  strokeWeight(3);
+  fill(0);
+  rect(boxX, boxY, boxW, boxH, 10);
+
+  noStroke();
+  fill(255);
+  textSize(22);
+  textAlign(LEFT, TOP);
+  text(textLine, boxX + 20, boxY + 20, boxW - 40, boxH - 40);
+}
