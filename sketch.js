@@ -554,6 +554,6 @@ function drawChatUI(textLine) {
   textAlign(LEFT, TOP);
   text(textLine, boxX + 20, boxY + 20, boxW - 40, boxH - 40);
 }
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+  function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }
