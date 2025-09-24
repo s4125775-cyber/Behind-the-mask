@@ -204,9 +204,6 @@ music.volume = 0.2;
 /////////////////////// Draw ///////////////////////
 function draw() {
   background(15);
-  function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-  }
 
   if (scene === 1) {
     frameCounterScene1++;
@@ -556,4 +553,7 @@ function drawChatUI(textLine) {
   textSize(22);
   textAlign(LEFT, TOP);
   text(textLine, boxX + 20, boxY + 20, boxW - 40, boxH - 40);
+}
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
