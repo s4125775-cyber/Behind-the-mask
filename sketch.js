@@ -14,7 +14,7 @@ let dialog = [
 ];
 let currentLine = 0;
 let charIndex = 0;
-let typingSpeed = 3;
+let typingSpeed = 2;
 let frameCounter = 0;
 
 let imgScene2 = [];
@@ -527,6 +527,14 @@ function drawChatBoxScene4() {
 
   let line = dialog4[currentLine4].substring(0, charIndex4);
   drawChatUI(line);
+  function drawRestartNoticeInChatBox(boxX, boxY, boxW, boxH) {
+    let notice = "Press 'B' to restart";
+    textSize(14);
+    textAlign(RIGHT, BOTTOM);
+    fill(180);
+    noStroke();
+    text(notice, boxX + boxW - 15, boxY + boxH - 10);
+  }
 }
 
 function drawChatBoxScene5() {
@@ -535,9 +543,18 @@ function drawChatBoxScene5() {
 
   let line = dialog5[currentLine5].substring(0, charIndex5);
   drawChatUI(line);
+  function drawRestartNoticeInChatBox(boxX, boxY, boxW, boxH) {
+    let notice = "Press 'B' to restart";
+    textSize(14);
+    textAlign(RIGHT, BOTTOM);
+    fill(180);
+    noStroke();
+    text(notice, boxX + boxW - 15, boxY + boxH - 10);
+  }
 }
 
 function drawChatUI(textLine) {
+
   let boxW = width - 150;
   let boxH = 120;
   let boxX = (width - boxW) / 2;
@@ -553,7 +570,59 @@ function drawChatUI(textLine) {
   textSize(22);
   textAlign(LEFT, TOP);
   text(textLine, boxX + 20, boxY + 20, boxW - 40, boxH - 40);
-}
-  function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
+
+  if (scene === 4 || scene === 5) {
+    drawRestartNoticeInChatBox(boxX, boxY, boxW, boxH);
   }
+}
+function drawRestartNoticeInChatBox(boxX, boxY, boxW, boxH) {
+  let notice = "Press 'B' to restart";
+  textSize(14);
+  textAlign(RIGHT, BOTTOM);
+  fill(180);
+  noStroke();
+  text(notice, boxX + boxW - 15, boxY + boxH - 10);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+// Press 'B' to restart the experience
+function keyPressed() {
+  if (key === 'b' || key === 'B') {
+
+    scene = 1;
+
+    // Scene 1
+    imgIndex1 = 0;
+    frameCounterScene1 = 0;
+
+    // Scene 2
+    currentLine = 0;
+    charIndex = 0;
+    frameCounter = 0;
+    imgIndex2 = 0;
+    frameCounterScene2 = 0;
+
+    // Quiz
+    currentQ = 0;
+    scoreAB = 0;
+    scoreCD = 0;
+
+    // Scene 4
+    currentLine4 = 0;
+    charIndex4 = 0;
+    frameCounter4 = 0;
+    imgIndex4 = 0;
+    frameCounterScene4 = 0;
+
+    // Scene 5
+    currentLine5 = 0;
+    charIndex5 = 0;
+    frameCounter5 = 0;
+    imgIndex5 = 0;
+    frameCounterScene5 = 0;
+
+  }
+}
